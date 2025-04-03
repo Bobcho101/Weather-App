@@ -5,7 +5,7 @@
 - **This is my first project with typescript + react**
 
 ## Hosted Version
-- **Link to the project hosted with firebase:** *https://weather-app-1234o87.web.app/*
+- **Link to the project hosted with firebase:** *https://weather-app-lnd.web.app/*
 
 ## How To Run The Project Locally On Your Machine
 1. **Install The Dependencies**
