@@ -36,13 +36,20 @@ interface Weather {
 }
 
 export const useGetCityInfo = () => {
-    const [cityTemp, setCityTemp] = useState<number>();
+    const [ cityTemp, setCityTemp ] = useState<number>();
     const [ loading, setLoading ] = useState<boolean>(false);
-    const [cityDescription, setCityDescription] = useState<string>('');
+    const [ cityDescription, setCityDescription ] = useState<string>('');
+    const [ error, setError ] = useState<boolean>(false);
 
     const getCityTemp = async (city: string) => {
         setLoading(true);
+        setError(false);
         const response: Response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}`);
+        if (!response.ok) {
+            setError(true);
+            setLoading(false);
+            return;
+        }
         const data: WeatherResponse = await response.json();
         setCityTemp(data.main.temp);
         const description = 
@@ -54,5 +61,5 @@ export const useGetCityInfo = () => {
         setLoading(false);
     }; 
 
-    return { cityTemp, cityDescription, loading, getCityTemp };
+    return { cityTemp, cityDescription, loading, error, getCityTemp };
 }
