@@ -2,10 +2,9 @@ import { useState } from "react";
 import { useGetCityInfo } from "../api/weatherApi"
 
 export const AppContainer: React.FC = () => {
-    const [ inputValue, setInputValue   ] = useState<string>("");
+    const [ inputValue, setInputValue ] = useState<string>("");
     const { cityTemp, cityDescription, loading, error, getCityTemp } = useGetCityInfo();
-    const [ unit, setUnit ] = useState<string>("celsius")
-
+    const [ unit, setUnit ] = useState<string>("celsius");
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setInputValue(e.target.value);
