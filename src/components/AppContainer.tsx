@@ -15,6 +15,10 @@ export const AppContainer: React.FC = () => {
         getCityTemp(inputValue);
     }
 
+    const clearBtnHandler = () => {
+        setInputValue("");
+    }
+
     const handleUnitChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
         setUnit(e.target.value);
     };
@@ -25,19 +29,25 @@ export const AppContainer: React.FC = () => {
             <div className="bg-gray-800 rounded-lg shadow-lg p-8 w-96">
                 <h1 className="text-2xl font-semibold text-center text-white mb-6">Weather App</h1>
 
-                <div className="mb-6">
+                <div className="relative mb-6">
                 <label htmlFor="city" className="block text-lg text-gray-400 mb-2">
                     Enter City:
                 </label>
-                <input
-                    id="city"
-                    type="text"
-                    placeholder="City Name"
-                    className="w-full p-2 border border-gray-600 rounded-lg text-white bg-gray-700 text-lg"
-                    onChange={handleInputChange}
-                    value={inputValue}
+                <div className="relative">
+                    <input
+                        id="city"
+                        type="text"
+                        placeholder="City Name"
+                        className="w-full p-2 pr-10 border border-gray-600 rounded-lg text-white bg-gray-700 text-lg"
+                        onChange={handleInputChange}
+                        value={inputValue}
                     />
+                    {inputValue.length > 0 && ( 
+                        <button onClick={clearBtnHandler} className="absolute cursor-pointer right-3 top-2.75 text-gray-400 hover:text-gray-300">
+                            ✕
+                        </button>)}
                 </div>
+            </div>
 
                 <div className="mb-6">
                     <label htmlFor="unit" className="block text-lg text-gray-400 mb-2">
@@ -84,8 +94,6 @@ export const AppContainer: React.FC = () => {
                     
                 </div>
                 }
-
-                
             </div>
         </div>
     </>)
