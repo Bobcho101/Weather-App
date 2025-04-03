@@ -2,6 +2,24 @@ import { useState } from "react";
 import { useGetCityInfo } from "../api/weatherApi"
 
 export const AppContainer: React.FC = () => {
+    const [ inputValue, setInputValue   ] = useState<string>("");
+    const { cityTemp, cityDescription, getCityTemp } = useGetCityInfo();
+    const [ unit, setUnit ] = useState<string>("celsius")
+
+
+    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setInputValue(e.target.value);
+    };
+
+    const searchBtnHandler = () => {
+        if(inputValue.trim() === "") return;
+        getCityTemp(inputValue);
+    }
+
+    const handleUnitChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+        setUnit(e.target.value);
+    };
+
     return(
     <>
         <div className="min-h-screen bg-gray-900 flex items-center justify-center p-6">
