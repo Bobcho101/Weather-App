@@ -1,9 +1,10 @@
 import './App.css'
+import { AppContainer } from './components/AppContainer'
 
-function App() {
+const App: React.FC = () => {
   return (
     <>
-     <h1>Hi</h1>
+        <AppContainer />
     </>
   )
 }
