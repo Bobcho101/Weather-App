@@ -3,7 +3,7 @@ import { useGetCityInfo } from "../api/weatherApi"
 
 export const AppContainer: React.FC = () => {
     const [ inputValue, setInputValue   ] = useState<string>("");
-    const { cityTemp, cityDescription, getCityTemp } = useGetCityInfo();
+    const { cityTemp, cityDescription, loading, getCityTemp } = useGetCityInfo();
     const [ unit, setUnit ] = useState<string>("celsius")
 
 
@@ -65,12 +65,23 @@ export const AppContainer: React.FC = () => {
                 </div>
                 
 
-                <div className="text-center">
-                {cityTemp && <div className="text-3xl font-semibold text-white">
-                    { unit === "celsius" ? `${(cityTemp - 273.15).toFixed(1)}°C` : `${cityTemp.toFixed(1)}°F`}
-                </div>}
-                <div className="text-xl text-gray-400">{cityDescription}</div>
+                {loading
+                ? <div className="flex justify-center items-center">
+                    <div className="spinner-border animate-spin inline-block w-12 h-12 border-4 border-t-blue-500 border-gray-300 rounded-full" role="status">
+                        <span className="visually-hidden"></span>
+                    </div>
                 </div>
+                : <div className="text-center">
+                    {cityTemp && <div className="text-3xl font-semibold text-white">
+                    { unit === "celsius" 
+                        ? `${(cityTemp - 273.15).toFixed(1)}°C` 
+                        : `${cityTemp.toFixed(1)}°F`}
+                    </div>}
+                    <div className="text-xl text-gray-400">{cityDescription}</div>
+                </div>
+                }
+
+                
             </div>
         </div>
     </>)

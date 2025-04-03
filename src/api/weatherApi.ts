@@ -37,9 +37,11 @@ interface Weather {
 
 export const useGetCityInfo = () => {
     const [cityTemp, setCityTemp] = useState<number>();
+    const [ loading, setLoading ] = useState<boolean>(false);
     const [cityDescription, setCityDescription] = useState<string>('');
 
     const getCityTemp = async (city: string) => {
+        setLoading(true);
         const response: Response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}`);
         const data: WeatherResponse = await response.json();
         setCityTemp(data.main.temp);
@@ -49,7 +51,8 @@ export const useGetCityInfo = () => {
             .toUpperCase() + word.slice(1)).join(" ");
 
         setCityDescription(description);
+        setLoading(false);
     }; 
 
-    return { cityTemp, cityDescription, getCityTemp };
+    return { cityTemp, cityDescription, loading, getCityTemp };
 }
